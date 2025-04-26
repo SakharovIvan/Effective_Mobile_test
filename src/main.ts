@@ -1,27 +1,27 @@
-import express, {Request,Response} from 'express'
+import express from "express";
+import TaskCotroller from "./controllers/task.controller";
+import dotenv from "dotenv";
 
-const app = express()
-const port = process.env.PORT|| 3000 
+dotenv.config();
 
+const app = express();
+const port = process.env.PORT || 3000;
+app.use(express.json()) 
 
 //Create task (Status: Новое)
-app.post('/tasks',(req:Request,res:Response)=>{
-    
-})
-
+app.post("/tasks", TaskCotroller.createTask);
 
 //Update task status (Status: В работе, завершено, отменено)
-app.put('/tasks:id',(req:Request,res:Response)=>{
-    
-})
+app.put("/tasks/:id/:status", TaskCotroller.updateTask);
 
-//Get all 
-app.get('/tasks:id',(req:Request,res:Response)=>{
-    
-})
-
+//Get task by id
+app.get("/tasks/find/:id", TaskCotroller.findTaskById);
+//Get all tasks
+app.get("/tasks", TaskCotroller.findTaskById);
+app.get("/tasks/date", TaskCotroller.listTasksByDate);
 
 //Cancell all tasks (Status "В работе"->"Отменено")
-app.put('/tasks/CancelAll',(req:Request,res:Response)=>{
-    
-})
+app.put("/cancel/tasks", TaskCotroller.cancelAllTasks);
+
+app.listen(port)
+console.log(`Server listening on port ${port}`)
