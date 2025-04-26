@@ -32,7 +32,7 @@ DB_USERNAME=root
    |key|description|necessarily
    |---| --|--|
    |theme| theme of your task|+|
-   |message| Message of your task|
+   |message| Message of your task|+|
 
    _Response:_
 
